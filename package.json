@@ -7,7 +7,10 @@
     "@types/screeps": "^2.5.4",
     "grunt-screeps": "^1.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-jshint": "^2.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
