@@ -9,7 +9,12 @@
   },
   "devDependencies": {
     "grunt": "^1.0.4",
-    "grunt-contrib-jshint": "^2.1.0"
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-file-append": "0.0.7",
+    "grunt-jsbeautifier": "^0.2.13",
+    "time-grunt": "^2.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
