@@ -101,3 +101,4 @@ About
 .screep.json
 .screeps.json
 dist/
+.tscache
