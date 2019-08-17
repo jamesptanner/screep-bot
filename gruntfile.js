@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy')
     grunt.loadNpmTasks('grunt-file-append')
     grunt.loadNpmTasks("grunt-jsbeautifier")
-
+    grunt.loadNpmTasks("grunt-ts")
     var currentdate = new Date();
     grunt.log.subhead('Task Start: ' + currentdate.toLocaleString())
     grunt.log.writeln('Branch: ' + config.branch)
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 ptr: config.ptr
             },
             dist: {
-                src: ['dist/*.js']
+                src: ['dist/*.js','dist/*.ts']
             }
         },
         
@@ -76,10 +76,15 @@ module.exports = function(grunt) {
                 config: '.jsbeautifyrc'
                 }
             }
+        },
+        ts: {
+            default : {
+              tsconfig: './tsconfig.json'
+            }
         }
     });
 
-    grunt.registerTask('default',  ['clean', 'jsbeautifier:modify','copy:screeps','file_append:versioning', 'screeps']);
+    grunt.registerTask('default',  ['clean', 'jsbeautifier:modify','ts','copy:screeps','file_append:versioning', 'screeps']);
     grunt.registerTask('test',     ['jsbeautifier:verify']);
     grunt.registerTask('pretty',   ['jsbeautifier:modify']);
 }

@@ -14,7 +14,9 @@
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-file-append": "0.0.7",
     "grunt-jsbeautifier": "^0.2.13",
-    "time-grunt": "^2.0.0"
+    "grunt-ts": "^6.0.0-beta.22",
+    "time-grunt": "^2.0.0",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
