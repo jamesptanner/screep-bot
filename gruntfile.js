@@ -12,7 +12,6 @@ module.exports = function(grunt) {
     grunt.log.subhead('Task Start: ' + currentdate.toLocaleString())
     grunt.log.writeln('Branch: ' + config.branch)
 
-
     grunt.initConfig({
         screeps: {
             options: {
@@ -64,23 +63,23 @@ module.exports = function(grunt) {
         },
         // Apply code styling
         jsbeautifier: {
-        modify: {
-            src: ["src/**/*.js"],
-            options: {
-            config: '.jsbeautifyrc'
+            modify: {
+                src: ["src/**/*.js"],
+                options: {
+                config: '.jsbeautifyrc'
+                }
+            },
+            verify: {
+                src: ["src/**/*.js"],
+                options: {
+                mode: 'VERIFY_ONLY',
+                config: '.jsbeautifyrc'
+                }
             }
-        },
-        verify: {
-            src: ["src/**/*.js"],
-            options: {
-            mode: 'VERIFY_ONLY',
-            config: '.jsbeautifyrc'
-            }
-        }
         }
     });
 
-    grunt.registerTask('default',  ['clean', 'copy:screeps','file_append:versioning', 'screeps']);
+    grunt.registerTask('default',  ['clean', 'jsbeautifier:modify','copy:screeps','file_append:versioning', 'screeps']);
     grunt.registerTask('test',     ['jsbeautifier:verify']);
     grunt.registerTask('pretty',   ['jsbeautifier:modify']);
 }

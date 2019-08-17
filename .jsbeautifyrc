@@ -1,0 +1,10 @@
+{
+    "indent_size": 4,
+    "indent_char": " ",
+    "indent_with_tabs": false,
+    "eol":"\n",
+    "end_with_newline": true,
+    "max_preserve_newlines": 2,
+    "brace_style": "collapse"
+
+}

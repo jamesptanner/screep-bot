@@ -1,3 +1,1 @@
-module.export.loop = function()
-{
-}
+module.export.loop = function() {}
