@@ -8,6 +8,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-file-append')
     grunt.loadNpmTasks("grunt-jsbeautifier")
     grunt.loadNpmTasks("grunt-ts")
+    grunt.loadNpmTasks('grunt-contrib-watch')
+
+
     var currentdate = new Date();
     grunt.log.subhead('Task Start: ' + currentdate.toLocaleString())
     grunt.log.writeln('Branch: ' + config.branch)
@@ -81,6 +84,12 @@ module.exports = function(grunt) {
             default : {
               tsconfig: './tsconfig.json'
             }
+        },
+        watch: {
+          scripts: {
+            files: ['src/**/*.js','src/**/*.ts'],
+            tasks: ['clean','jsbeautifier:modify','ts','copy:screeps','file_append:versioning'],
+          }
         }
     });
 
