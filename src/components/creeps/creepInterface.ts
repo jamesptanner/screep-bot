@@ -1,5 +1,6 @@
 
 import { Guid } from "guid-typescript";
+import { Config } from "../../config/Config";
 
 interface BasicCreepInterface {
     creep: Creep;
@@ -14,25 +15,35 @@ interface BasicCreepInterface {
     moveTo(target:RoomPosition):void;
     
     run():void;
+
+    creepAction(): void;
+
 }
 
 export default abstract class MyCreep implements BasicCreepInterface{
-    public creep: Creep;
+    public creep!: Creep;
+    spawn!: StructureSpawn;
 
     setCreep(creep: Creep): void {
         this.creep = creep;
     }
     renewCreep(): void {
-        throw new Error("Method not implemented.");
+        if(!this.creep.pos.isNearTo(this.spawn.pos)){
+            this.moveTo(this.spawn.pos);
+        }
+        else{
+            this.spawn.renewCreep(this.creep);
+        }
     }
     needsRenewal(): boolean {
-        throw new Error("Method not implemented.");
+         if(this.creep.ticksToLive ) return this.creep.ticksToLive < Config.CREEP_REFRESH_NEEDED; 
+         return false;
     }
-    setRenewStation(spawn: any): void {
-        throw new Error("Method not implemented.");
+    setRenewStation(spawn: StructureSpawn): void {
+        this.spawn = spawn;
     }
-    moveTo(target: RoomPosition): void {
-        throw new Error("Method not implemented.");
+    moveTo(target: RoomPosition | RoomObject): void {
+        this.creep.moveTo(target);
     }
 
     constructor (parts: BodyPartConstant[], role:string ){
@@ -43,9 +54,18 @@ export default abstract class MyCreep implements BasicCreepInterface{
     bodyDesign: BodyPartConstant[];
     role: string;
     buildCreep(spawn:StructureSpawn){
-        spawn.spawnCreep(this.bodyDesign, this.role + Guid.create().toString() );
-    
+        spawn.spawnCreep(this.bodyDesign, this.role + Guid.create().toString(), );
+        this.setRenewStation(spawn);
+        
     }
 
-    abstract run(): void;
+    run(){
+        if(this.needsRenewal()){
+            this.renewCreep();
+        }
+        else {
+            this.creepAction();
+        }
+    };
+    abstract creepAction(): void;
 }
